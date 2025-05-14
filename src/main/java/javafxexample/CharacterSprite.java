@@ -17,9 +17,10 @@ public class CharacterSprite extends VBox{
 
     public CharacterSprite(Character character) {
         this.character = character;
-        this.normal = new Image(this.character.getName() + ".png");
-        this.mutated = new Image("alien.png");
-        this.skull = new Image("skull.png");
+        
+        this.normal = new Image(getClass().getResourceAsStream(this.character.getTitle() + ".png"));
+        this.mutated = new Image(getClass().getResourceAsStream("alien.png"));
+        this.skull = new Image(getClass().getResourceAsStream("skull.png"));
         this.spriteView = new ImageView(normal);
         this.name = new Label(this.character.toString());
         this.name.setFont(new Font("Helvetica", 25));
@@ -41,7 +42,7 @@ public class CharacterSprite extends VBox{
         this.character.mutate();
         updateSprite();
     }
-
+    
     private void revertCharacter() {
         this.character.revert();
         updateSprite();
@@ -50,16 +51,31 @@ public class CharacterSprite extends VBox{
     private void updateSprite() {
         switch (this.character.getState()) {
             case NORMAL:
+                getChildren().removeAll(this.spriteView, this.name);
                 this.spriteView = new ImageView(this.normal);
                 this.name = new Label(this.character.toString());
+                this.name.setFont(new Font("Helvetica", 25));
+                this.name.setTextFill(Color.GOLD);
+                this.name.setTextAlignment(TextAlignment.CENTER);
+                getChildren().addAll(this.spriteView, this.name);
                 break;
             case MUTATED:
+                getChildren().removeAll(this.spriteView, this.name);
                 this.spriteView = new ImageView(this.mutated);
                 this.name = new Label("Blurg Blurg Blurg");
+                this.name.setFont(new Font("Helvetica", 25));
+                this.name.setTextFill(Color.GOLD);
+                this.name.setTextAlignment(TextAlignment.CENTER);
+                getChildren().addAll(this.spriteView, this.name);
                 break;
             case DEAD:
+                getChildren().removeAll(this.spriteView, this.name);
                 this.spriteView = new ImageView(this.skull);
                 this.name = new Label("RIP: " + this.character.toString());
+                this.name.setFont(new Font("Helvetica", 25));
+                this.name.setTextFill(Color.GOLD);
+                this.name.setTextAlignment(TextAlignment.CENTER);
+                getChildren().addAll(this.spriteView, this.name);
                 break;
             default:
                 break;

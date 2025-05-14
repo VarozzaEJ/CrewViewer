@@ -10,14 +10,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class CrewPane extends FlowPane {
-    private Character[] crew;
     public CrewPane(Character[] crew) {
-        this.crew = crew;
         setStyle("-fx-background-color: midnightblue");
         setHgap(25);
         setVgap(25);
         setAlignment(Pos.CENTER);
-        Label titleLabel = new Label("USS Unrelianat - Crew");
+        Label titleLabel = new Label("USS Unreliant - Crew");
         titleLabel.setFont(new Font("Helvetica", 35));
         titleLabel.setTextFill(Color.GOLD);
         getChildren().add(titleLabel);
@@ -31,7 +29,7 @@ public class CrewPane extends FlowPane {
     private void mouseClickSprite(MouseEvent event) {
         CharacterSprite source = (CharacterSprite)event.getSource();
         source.toggleState();
-        if(crew[0].getNumberAlive() == 0) {
+        if(Character.getNumberAlive() == 0) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setContentText("The Entire Crew Has Died!");
             alert.setTitle(null);
